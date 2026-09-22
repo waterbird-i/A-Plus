@@ -1,0 +1,16 @@
+﻿key,src,register,en,en_status,max_chars,lines,font_variant,note
+broadcast.time.now_fmt,现在是北京时间 {0}。,广播,,n/a,,,,主计时器（3.1）：纯听觉·零 HUD
+broadcast.time.remain_fmt,距离考试结束还有 {0} 分钟。请考生注意掌握时间。,广播,,n/a,,,,
+broadcast.time.remain_last5,距离考试结束还有最后五分钟。,广播,,n/a,,,,
+broadcast.time.remain_last1,距离考试结束还有最后一分钟。,广播,,n/a,,,,
+broadcast.check.name,请考生检查答题卡上的姓名和考号。,广播,,n/a,,,,
+broadcast.check.device,请考生将手机等电子设备关机，放在指定位置。,广播,,n/a,,,,这条是「静音 or 响铃」开场决策的世界内依据（5.3）
+broadcast.listening.start,英语听力考试现在开始。听力期间不得翻卷、不得张望。,广播,,n/a,,,,★A2：高压窗口——两分钟内不能动·而双重注视照常判定（5.5.2）
+broadcast.listening.end,听力部分结束，请考生继续作答。,广播,,n/a,,,,
+broadcast.collect.stop,考试结束，请考生立即停笔。,广播,,n/a,,,,
+broadcast.collect.order,请将试卷与答题卡正面朝上放在桌面，等待监考老师收卷。,广播,,n/a,,,,
+broadcast.roster_fmt,{0} 号考生。,广播,,n/a,,,,★恐怖化：报时的功能被替换成念考号（3.4）。念到你时全班一起转头
+broadcast.roster_resume,请考生继续作答。,广播,,n/a,,,,
+broadcast.eye.start,眼保健操，现在开始。,广播,,n/a,,,,
+broadcast.eye.count_fmt,{0},广播,,n/a,,,,口令计数；数到「六」时音色变了（6.4）——音色不是字符串·是音频资产
+broadcast.tamper.note,报时污染不改文本·只改参数,内部,,n/a,,,,★3.4 的「报时变慢／时间倒退」是同一个 key 传入不同数值·不是新字符串。只有「改念考号」需要新 key

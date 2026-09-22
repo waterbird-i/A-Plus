@@ -1,0 +1,11 @@
+﻿key,src,register,en,en_status,max_chars,lines,font_variant,note
+ledger.cover,监考记录,手写,,n/a,,1,手写,讲台上的本子；永不以 UI 出现（2.6）
+ledger.col.no,考号,手写,,n/a,,1,手写,
+ledger.col.time,时间,手写,,n/a,,1,手写,
+ledger.col.note,备注,手写,,n/a,,1,手写,
+ledger.entry.fmt,{0},手写,,n/a,,1,手写,考号行；2026 年是圆珠笔·1998 年是钢笔——字迹是资产（2.5.3）
+ledger.note.adapted,已适应,手写,,n/a,,1,手写,★阶段四（N=10–14）出现在你自己考号旁·不是你的字迹（2.4）
+ledger.note.repeat,留级,手写,,n/a,,1,手写,同场死满 5 次（2.5.4）
+ledger.note.absent,缺考,手写,,n/a,,1,手写,
+ledger.signature,监考教师签名,手写,,n/a,,1,手写,终局：记名册最后一页的字迹与你自己的相同（2.6）
+ledger.last_page.blank,（这一页没有字）,内部,,n/a,,1,手写,最后一页只有字迹没有文字——不可用字符串表达·见 README 的「呈现文本」

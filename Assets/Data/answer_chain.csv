@@ -1,0 +1,63 @@
+﻿q_id,answer_type,answer,pools,cross_source,occlusions,difficulty,demo,notes
+q.fill.01,动态,现行抬头年份 − 45（校庆年数 45）,flag|honor_roll|photo,eraser（借橡皮金属反光看被挡住的那一半）,被书包挡住一半|被玻璃反光吃掉,中,y,★与 2.5.3 年份倒退咬合：同一道题每轮答案都不同——这就是「答案源随机化」的机制来源
+q.fill.02,固定,厚德　笃学,board|rules_wall|textbook,,被擦掉一半|被撕掉一角,易,y,文字类；校训被改一个字（6.3）
+q.fill.03,固定,下课,board|textbook,,被擦掉一半|缺页,易,y,
+q.fill.04,动态,本轮座位表人数（第 4 轮后 +1）,desk_front|honor_roll|ledger|photo,,被身体挡住|被合上,中,y,★与「日光灯闪烁时人数变了」咬合：你数两遍得到两个数
+q.fill.05,固定,3,honor_roll|flag,,被新榜覆盖|被糨糊洇湿,易,y,
+q.fill.06,动态,本轮名次（逐轮下移一格）,honor_roll|flag,paper_self（先用考号确认红榜上哪一行是你）,被新榜覆盖|被书包挡住一半,中,y,★跨源；与 6.3「每次经过都往下移一格」咬合
+q.fill.07,动态,0–15 随机,clock|broadcast,,被蝉鸣盖住|被呼吸声盖住,中,y,★两个计时器互相参照；与 3.4「两个时间差了十分钟」咬合
+q.fill.08,固定,1978,flag|honor_roll|photo,,被粉笔灰盖住|被新榜覆盖,中,y,与 2.3「这张脸你早就见过」的伏笔同源
+q.fill.09,动态,21（第 4 轮后 22）,desk_front|honor_roll|photo|ledger,,被手臂压住|被翻到别的页,中,y,★与「人数变了」咬合
+q.fill.10,固定,白,photo|window,,被玻璃反光吃掉|雨痕,难,y,观察类；两处校服互为印证
+q.fill.11,固定,0601,ledger|rules_wall,,被翻到别的页|被撕掉一角,中,y,
+q.fill.12,动态,3（逐轮 +1）,ledger|honor_roll,rules_wall（第六条「被记名三次者」——不读规则就不知道「被划掉」是什么意思）,被合上|被新榜覆盖,难,y,★跨源：记名册＋规则墙；你数的不是数字·是被划掉的人（2.6）
+q.fill.13,固定,0713,paper_self|desk_front,,被手臂压住,易,y,★自指题：最安全也最容易忽略
+q.fill.14,动态,102（逐轮 +1）,back_wall|board,,被下节课板书覆盖,易,y,★与 6.3「倒计时在增加」咬合
+q.fill.15,固定,2,paper_self|desk_front,,被身体挡住,易,y,
+q.fill.16,固定,C,desk_front|paper_self,,被身体挡住|被手臂压住,中,y,★前桌可能故意写错（4.4）
+q.fill.17,动态,本题号（每轮不同）,desk_front|paper_self,,被身体挡住,难,y,★4.4：有人故意写错·因为他也在作弊
+q.fill.18,固定,静,board|rules_wall|textbook,,被擦掉一半|被撕掉一角,中,y,与 6.3「黑板上的字多一笔」咬合
+q.fill.19,固定,10:20,back_wall|rules_wall|board,,被撕掉一角|被擦掉一半,易,y,与第三部分广播报时互为参照
+q.fill.20,固定,1,fan|door_glass|window,,转速不对|水汽,中,n,★与 6.3 吊扇挂物咬合；demo=n：吊扇与后门毛玻璃在 sources.csv 里全是 demo=n（正式版资产），Demo 里没有合法落位
+q.fill.21,固定,2,fan|door_glass|window,,水汽|雨痕,难,n,demo=n：同上——fan / door_glass / window 三个源全是正式版资产，Demo 里没有合法落位；这条留给正式版
+q.fill.22,固定,抬头,rules_wall|board,,被撕掉一角|被擦掉一半,易,y,★★这一题的答案就是杀死你的那条规则——抄它的过程本身违规（2.2）
+q.fill.23,动态,3（家长签字出现的轮次）,paper_self|desk_front,paper_self,被身体挡住,难,y,★跨源：抬头次数＝同一张卷子的「第 N 次模拟考试」（跨源 id 就是 paper_self）；与 6.3「家长签字」咬合。他从来没来过学校
+q.fill.24,固定,2,photo|honor_roll,,被粉笔灰盖住|被糨糊洇湿,难,y,
+q.fill.25,固定,3,photo|window,,被玻璃反光吃掉|雨痕,难,y,★与 6.3「窗外」咬合；旧照片里的届别印证窗外那个人
+q.math.01,固定,2023,phone_calc|phone_sms,,,易,y,★答案是年份·与 2.5.3 呼应
+q.math.02,固定,96,phone_calc|phone_sms,,,易,y,
+q.math.03,固定,2,phone_calc|phone_sms,,,易,y,★你在为「及格」这件事作弊
+q.en.01,固定,exam,board_en|textbook,,被擦掉一半|缺页,易,y,英语课内词（A）→ 环境通道
+q.en.02,固定,invigilator,phone_sms|textbook,,缺页,中,y,★英语课外词（A）→ 手机通道。一个「看着你的人」的词
+q.en.03,动态,听力第 3 题答案（每轮不同）,phone_sms|board_en,,被擦掉一半,难,y,★A2：听力内容只能靠手机；而听力期间你不能动（5.5.2）
+q.en.04,固定,honest,textbook|board_en,,缺页|被擦掉一半,中,y,英语课内词（A）
+q.news.01,动态,现行抬头年份（随 2.5.3 倒退）,phone_sms|phone_outbox,,,难,y,★★你填的「今年」到底是哪一年
+q.news.02,固定,9 月 1 日,phone_sms|phone_outbox|phone_album,,,易,y,
+q.news.03,固定,1 月 18 日,phone_sms|phone_outbox,,,易,y,手机独占：放假通知只在短信里——这条逼你必须掏手机
+q.fill.26,动态,第 N 考场（N = 本轮「第 N 次模拟考试」的次数）,paper_self|ledger|rules_wall,,被翻到别的页,易,y,★考场号随抬头一起变；2.5.1
+q.fill.27,固定,22,ledger|desk_front|rules_wall,,被合上|被身体挡住,易,y,★6.3「空座位」：应到 22 · 实到 21
+q.fill.28,固定,Do,rules_wall|board_en|board,,被撕掉一角|被擦掉一半,中,y,★★A3：背面那条英文隐藏条款字面成立——它就是 q.fill.22 那条规则（2.2 / 6.2）
+q.fill.29,动态,空座位数（第 1 轮后 1，逐轮 +1）,desk_front|paper_self|rules_wall,ledger,被身体挡住|被手臂压住,难,y,★跨源：记名册的「应到」减教室里数到的人；7.1 第一场异象收尾
+q.fill.30,固定,六,broadcast|clock,,被蝉鸣盖住|被呼吸声盖住,中,y,★6.4 眼保健操口令：数到「六」时音色变了（只有听觉源给得出）
+q.fill.31,固定,12,broadcast|board|textbook,,被蝉鸣盖住|被擦掉一半,中,y,★6.4 隔壁班齐声朗读——而你在四楼，隔壁班是空的
+q.fill.32,固定,50,broadcast|clock|rules_wall,,被蝉鸣盖住|被呼吸声盖住,中,y,★6.4 日光灯 50Hz 嗡声：异视的核心线索
+q.fill.33,动态,本轮被红笔圈出的题号（逐轮不同）,paper_self|desk_front,eraser,被手臂压住,难,y,★跨源：对照橡皮上的字迹；6.3「你自己的答题卡」
+q.fill.34,固定,6 月 3 日,textbook|paper_self|board,,缺页|被擦掉一半,难,y,★6.3「错题本」：你从没错过的题上面有你的订正笔迹
+q.fill.35,固定,0,ledger|desk_front|broadcast,,被身体挡住|被蝉鸣盖住,中,y,★6.4 所有人都在翻卷子 · 而所有人都在看你 · 没有人动
+q.fill.36,固定,0713,ledger|rules_wall,paper_self,被合上|被撕掉一角,难,y,★★跨源：先确认自己卷面上的考号；2.6 终局那一页的字迹和你一样
+q.fill.37,固定,0601,window|photo|honor_roll,ledger,雨痕|被玻璃反光吃掉,难,y,★★跨源：记录本上被划掉的考号；6.3「窗外」——窗外的人就是被划掉的那个人
+q.fill.38,动态,被念到的考号（终局为本人 0713，之前为记录本上的下一个考号）,broadcast|clock,ledger,被蝉鸣盖住|被呼吸声盖住,难,y,★3.4 报时被替换成念考号；7.1 终局异象收尾
+q.fill.39,固定,c²,eraser|paper_self,,,易,y,★4.2 橡皮／笔袋夹层：进场前抄的 · 只有你有 · 也是唯一没有遮挡的源
+q.fill.40,动态,进场当年的年份（随 2.5.3 与 q.fill.01 同步倒退 2026 → 1998）,eraser|flag|paper_self,,,中,y,★★2.5.3：橡皮上抄的「今年」不变 · 抬头的年份在往后退
+q.fill.41,动态,本轮名次（= 上一轮名次 − 1，与 q.fill.06 红榜下移同源）,eraser|honor_roll|paper_self,,被糨糊洇湿|被新榜覆盖,中,y,★橡皮上抄的是上一轮排名；6.3 红榜下移 · 糨糊未干
+q.fill.42,动态,名字旁印的分数（逐轮 −1，与名次下移同步）,honor_roll|flag,paper_self,被糨糊洇湿|被新榜覆盖,中,y,★跨源：先用卷面考号确认哪一行是你；4.4 不可信来源
+q.fill.43,动态,第 1–14 轮为「第 N 次模拟考试」；第 15 轮起为你的考号 0713,paper_self|ledger|clock,,被合上|被翻到别的页,易,y,★★2.5.1 / 2.5.2 终局：抬头变成你的考号——你自己发现的
+q.math.04,固定,12,phone_calc|phone_sms,,,易,y,数学类 · 手机通道（计算器）；★8.2 的 8–10 道/轮
+q.math.05,固定,9:15,phone_calc|phone_sms,,,中,y,★3.1 广播报时 × 3.4 报时污染：挂在墙上的数字和广播说的对不上
+q.math.06,固定,2,phone_calc|phone_outbox|phone_sms,,,难,y,★5.4 电量：手机通道的额度 · 发短信比看短信更贵
+q.en.05,固定,Li Hua,board_en|textbook|paper_self,,被擦掉一半|缺页,易,y,★教材腔（5.5.1）· A4：你写下的每一句都是真的
+q.en.06,固定,silence,board_en|textbook,,被擦掉一半|缺页,易,y,英语课内词（A）→ 环境通道；★6.4 所有人静止 · 但考场有声音
+q.en.07,固定,0713,phone_sms|phone_album,,,难,y,★★A2 + 3.4：听力念的「第 9 题答案」是你的考号；听力期间你不能动
+q.news.04,固定,9 月 8 日,phone_sms|phone_outbox|phone_album,,,易,y,★4.4 短信里的日期会骗你；与 q.fill.23 家长签字咬合
+q.news.05,动态,回信里写的年份（随 2.5.3 倒退 · 与本轮抬头同年）,phone_outbox|phone_sms|phone_album,,,难,y,★★7.1 第三场异象收尾：回信写着你的考号和一个日期
+q.news.06,动态,照片拍摄的年份（随 2.5.3 倒退 · 与本轮抬头同年）,phone_album|phone_sms,,,难,y,★★7.1 第二场异象收尾：往届考生的脸 · 其中一张是你

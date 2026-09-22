@@ -1,0 +1,20 @@
+# 换行与文本规范化
+* text=auto
+
+# CSV 必须带 UTF-8 BOM —— BOM 由文件内容携带，git 不会替你加，见 README「四条硬规则」第 1 条
+*.csv text eol=crlf
+
+# C#：Unity 在 Windows 上按 CRLF 最省事
+*.cs   text eol=crlf
+*.ps1  text eol=crlf
+
+# 文档与脚本用 LF
+*.md   text eol=lf
+*.js   text eol=lf
+
+# 二进制
+*.png binary
+*.jpg binary
+*.fbx binary
+*.wav  binary
+*.ogg  binary

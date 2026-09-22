@@ -1,0 +1,13 @@
+﻿key,src,register,en,en_status,max_chars,lines,font_variant,note
+death.stage.1.name,一 · 惊吓,内部,,n/a,,,,N = 1–2。仅开发／验收用·不上屏（零 HUD）
+death.stage.1.desc,满响炸点·极近正冲占满屏·抖屏＋白闪·无预警·立刻复读,内部,,n/a,,,,
+death.stage.2.name,二 · 犹疑,内部,,n/a,,,,N = 3–5
+death.stage.2.desc,音效变闷·冲到一半停住退回黑暗·前导静默 0.3–1s·死后停 1–2s,内部,,n/a,,,,
+death.stage.3.name,三 · 错位,内部,,n/a,,,,N = 6–9
+death.stage.3.desc,画面先到·声音晚 0.4–1.5s；静止站着看你；站 3–5s 才走,内部,,n/a,,,,音画错位是本系统最有效的单点技术（2.4）
+death.stage.4.name,四 · 静默,内部,,n/a,,,,N = 10–14
+death.stage.4.desc,无音效·不出现正脸；手不听你的；笔尖划破卷子；她不再走,内部,,n/a,,,,
+death.stage.5.name,五 · 同化,内部,,n/a,,,,N = 15+
+death.stage.5.desc,没有事件的死亡：你抬头·抬头已经换成下一次,内部,,n/a,,,,
+death.curve.note,"t = clamp(N / 15, 0, 1)",内部,,n/a,,,,6 个连续参数全部由 t 插值；禁止 if-else 模式分支（2.4）
+death.test.prompt,第几次开始觉得不吓人了？,内部,,n/a,,,,验收问题：连死 16 次后问测试者·用实测数字反过来标定 t（2.4）

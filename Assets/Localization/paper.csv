@@ -1,0 +1,15 @@
+﻿key,src,register,en,en_status,max_chars,lines,font_variant,note
+paper.header.year_fmt,{0} 学年,卷面,,n/a,,1,印刷体,{0} 是年份；随 2.5.3 从 2026 往前退到 1998。占位符用普通代码替换（不用 Smart String 语法）
+paper.header.title,期末质量检测,卷面,,n/a,,1,印刷体,
+paper.header.count_fmt,第 {0} 次模拟考试,卷面,,n/a,12,1,印刷体,★复读计数器（2.5.1）。呈现层把数字排成全角等距「第 三 次 模 拟 考 试」——排版是资产
+paper.header.room_fmt,考场：{0},卷面,,n/a,,1,印刷体,
+paper.header.id_fmt,考号：{0},卷面,,n/a,,1,印刷体,阶段五：抬头只剩考号·不再有次数（2.5.2）
+paper.header.subject_fmt,科目：{0},卷面,,n/a,,1,印刷体,
+paper.section.instructions,注意事项,卷面,,n/a,,1,印刷体,
+paper.instruction.01,答题前请将姓名、考号填写在答题卡指定位置。,卷面,,n/a,,1,印刷体,
+paper.instruction.02,请在答题卡上作答，写在试卷上无效。,卷面,,n/a,,1,印刷体,
+paper.instruction.03,考试结束后，试卷与答题卡一并交回。,卷面,,n/a,,1,印刷体,
+paper.answer_sheet.title,答题卡,卷面,,n/a,,1,印刷体,
+paper.signature.student,考生签名,卷面,,n/a,,1,印刷体,
+paper.signature.parent,家长签字,卷面,,n/a,,1,印刷体,★恐怖点（6.3）：你签了你爸的名字；第三轮后签名变成你爸的笔迹
+paper.mark.blank,____,卷面,,n/a,,1,印刷体,填空横线

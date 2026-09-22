@@ -1,0 +1,14 @@
+﻿domain,label,id,weight,note
+difficulty,易,easy,0,每轮 8-10 道的难度配比要用它（见 Docs/难度配比标定.md）
+difficulty,中,medium,0,
+difficulty,难,hard,0,
+channel,环境,environment,0,4.2：两条通道必须互相不可替代
+channel,手机,phone,0,
+answer_type,固定,fixed,0,答案不随轮次变化
+answer_type,动态,dynamic,0,答案随轮次/年份系统变化（2.5.3）
+risk,无,none,0,暴露代价权重，用于原型的「动作步数／暴露分」模型
+risk,低,low,1,
+risk,中,medium,2,
+risk,高,high,3,
+risk,极高,extreme,4,
+risk,最高,critical,5,★sources.csv 实际用到（4 个手机源），但设计文档 4.2 的 risk 枚举只写到「极高」——原型跑出来的数据/文档不一致，已在 README 标注

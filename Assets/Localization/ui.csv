@@ -1,0 +1,14 @@
+﻿key,src,register,en,en_status,max_chars,lines,font_variant,note
+ui.menu.start,开始考试,界面,,n/a,,,,零 HUD 意味着界面字符串刻意极少
+ui.menu.continue,继续,界面,,n/a,,,,
+ui.menu.settings,设置,界面,,n/a,,,,
+ui.menu.quit,退出考场,界面,,n/a,,,,中式措辞：不是「退出游戏」而是「交卷离场」
+ui.setting.master_volume,主音量,界面,,n/a,,,,
+ui.setting.subtitles,字幕,界面,,n/a,,,,
+ui.setting.language,语言,界面,,n/a,,,,当前只有「中文」一个选项——B 永不做（决策 #28）
+ui.pause.title,暂停,界面,,n/a,,,,
+ui.pause.resume,继续,界面,,n/a,,,,
+ui.pause.quit_confirm,确定离开考场吗？离场即视为交卷。,界面,,n/a,,,,
+ui.loading.paper,正在分发试卷…,界面,,n/a,,,,
+ui.error.missing_key,［缺文本：{0}］,内部,,n/a,,,,开发期回落；发布前命中数必须为 0
+ui.note.zero_hud,本作没有 HUD。,界面,,n/a,,,,状态都做在世界里：时间在广播（3.1）· 记名在讲台（2.6）· 电量在手机（5.4）

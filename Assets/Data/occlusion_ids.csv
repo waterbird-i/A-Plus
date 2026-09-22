@@ -1,0 +1,19 @@
+﻿occlusion,id,kind,extra_steps,resolvable,note
+被书包挡住一半,schoolbag_half,visual,1,y,★4.3 的原始示例：只露一半，必须换角度（被前桌的书包挡住）
+被糨糊洇湿,paste_bleed,visual,1,y,红榜刚贴·糨糊未干（6.3）
+被玻璃反光吃掉,glass_glare,visual,2,y,★4.3 示例第 5 步的同族解法：借反光/换角度
+被粉笔灰盖住,chalk_dust,visual,0,y,轻微遮挡，不改路径长度
+被擦掉一半,wiped_half,visual,1,y,★4.4：你看到的永远是别人处理过的信息
+被下节课板书覆盖,overwritten_board,visual,1,y,上一节课与下一节课的信息叠在一起
+被新榜覆盖,covered_by_new,visual,2,n,旧榜已被盖住 ⇒ 信息不可得，必须换到该题另一个落位池
+被身体挡住,body_block,visual,2,y,★4.3：他什么时候挪 = 老师现在在看哪一排
+被手臂压住,arm_cover,visual,1,y,与「被身体挡住」成对：压住是可等待的
+被合上,closed,visual,2,y,记名册在讲台 ⇒ 打开它的动作本身是极高风险（2.6）
+被翻到别的页,wrong_page,visual,1,y,翻页要时间，而且翻页的动作可见
+被撕掉一角,torn_corner,visual,2,n,缺的那一角就是答案 ⇒ 换落位池（隐藏条款在背面）
+被蝉鸣盖住,cicada_mask,audio,1,y,听觉源（3.1）；等蝉鸣过去
+被呼吸声盖住,breath_mask,audio,1,y,★★唯一由玩家自己造成的遮挡：暴露越高越听不见（2.1 呼吸＝暴露）
+转速不对,fan_speed,visual,1,y,吊扇挂物（6.3）；异象味的遮挡
+水汽,condensation,visual,1,y,后门毛玻璃小窗（4.2）
+雨痕,rain_streak,visual,1,y,窗外（6.3）
+缺页,missing_page,visual,2,n,信息不在这本书上 ⇒ 换落位池

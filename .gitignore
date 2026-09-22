@@ -1,0 +1,34 @@
+# Unity 生成物（这些永远不进仓）
+[Ll]ibrary/
+[Tt]emp/
+[Oo]bj/
+[Bb]uild/
+[Bb]uilds/
+[Ll]ogs/
+[Uu]ser[Ss]ettings/
+[Mm]emoryCaptures/
+
+# Unity / IDE 生成的工程文件
+*.csproj
+*.unityproj
+*.sln
+*.suo
+*.user
+*.userprefs
+*.pidb
+*.booproj
+*.svd
+*.pdb
+*.mdb
+*.opendb
+*.VC.db
+
+# 命令行原型的编译产物与报告（随时可用 Tools/build-proto.ps1 重建）
+Tools/APlusProto/bin/
+Tools/APlusProto/reports/
+
+# 系统垃圾
+.DS_Store
+Thumbs.db
+desktop.ini
+*~

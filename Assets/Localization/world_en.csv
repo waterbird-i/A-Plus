@@ -1,0 +1,17 @@
+﻿key,src,register,en,en_status,max_chars,lines,font_variant,note
+world.paper.section.listening,Listening Comprehension,教材,,n/a,,1,印刷体,世界内英文（A）：题干永远是英文·不随语言设置改变（5.5.2）
+world.paper.section.reading,Reading Comprehension,教材,,n/a,,1,印刷体,
+world.paper.section.writing,Writing,教材,,n/a,,1,印刷体,
+world.listening.instruction,Listen to the recording and choose the best answer.,教材,,n/a,,1,印刷体,
+world.listening.q_fmt,Question {0}.,教材,,n/a,,1,印刷体,★A2：听力音频可被污染——「Question 9」念的是你的考号
+world.reading.passage.01,The student looked up. The clock on the back wall had not moved.,教材,,n/a,,1,印刷体,★A1：阅读短文开始描述这个考场；短文的年代感随 2.5.3 前退
+world.reading.q.01,What is the author's attitude towards the examination?,教材,,n/a,,1,印刷体,
+world.reading.opt.01a,Indifferent.,教材,,n/a,,1,印刷体,
+world.reading.opt.01b,Sincere.,教材,,n/a,,1,印刷体,
+world.reading.opt.01c,Frightened but obedient.,教材,,n/a,,1,印刷体,正确答案：玩家要读懂自己的处境才能选对
+world.reading.opt.01d,Humorous.,教材,,n/a,,1,印刷体,
+world.writing.prompt,Write about your school in about 100 words.,教材,,n/a,,1,印刷体,★A4：你写的每一句都是真的；交卷时字数变多了
+world.writing.reminder,Your composition should be no less than 100 words.,教材,,n/a,,1,印刷体,
+world.rule.hidden_07,Candidates shall not confirm their own name upon handing in the paper.,公文,,n/a,,1,手写,★A3：规则背面的隐藏条款有一条是英文的（字迹和你的相同）。原文即英文——所以填 src 列·不填 en 列
+world.textbook.unit,Unit 5　The World Around Us,教材,,n/a,,1,印刷体,
+world.blackboard.word.fmt,{0},教材,,n/a,,1,粉笔,黑板上的英文单词；粉笔呈现·字迹断续
