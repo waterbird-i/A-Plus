@@ -65,13 +65,47 @@
 |---|---|
 | `q_id` | **就是 String Table 的 key**（`q.fill.01`）。校验器会与 `questions.csv` / `world_en.csv` 做**双向参照完整性**检查 |
 | `answer_type` | `固定` ｜ `动态`。**动态 = 答案随轮次/年份系统变化** |
-| `answer` | 答案本身。动态答案写清**由什么驱动** |
+| `answer` | 答案本身。动态答案写清**由什么驱动**（给人看的；运行时不读这一列） |
+| `answer_expr` | **动态题必填，固定题必须留空。** 运行时算答案用的表达式，语法见下文 |
+| `distractors` | 四选一的错误选项（决策 #38），语法见下文。优先取自 4.4「不可信源」给出的错答案 |
 | `pools` | **合法落位池**（`\|` 分隔）。设计文档 8.2 要求 **2–4 个** |
 | `cross_source` | **还需要读的第二个源**（跨源拼合），不需要时留空 |
 | `occlusions` | 允许的遮挡状态。必须是所落位池的**并集的子集** |
 | `difficulty` | `易` ｜ `中` ｜ `难` |
 | `demo` | `y` ｜ `n` |
 | `notes` | ★ 标出与哪条机制咬合，改动前先看设计文档 |
+
+### 四选一：`answer_expr` 与 `distractors`
+
+所有题都是四选一：1 个正确项 + 3 个干扰项，由 `ChoiceBuilder` 按轮次种子洗牌。
+固定题的正确项就是 `answer`；动态题的正确项是 `answer_expr` 在本轮上下文里的值。
+
+**`answer_expr`**（`AnswerExpression`）：
+
+```
+expr    := unary (('+' | '-') unary)*
+primary := 整数 | 变量 | after(n) | rand(a;b) | oneof(e;e;…) | @key | @key(expr) | $name | 'text' | (expr)
+```
+
+| 写法 | 含义 |
+|---|---|
+| `year` · `attempt` · `deaths` · `round_size` · `clock_offset` | 本轮年份 / 第几次考 / 累计死亡 / 本轮题数 / 时钟偏差（0–15，每轮随机） |
+| `after(n)` | 第 n 次考之后开始增长：`max(0, attempt - n)` |
+| `rand(a;b)` | 本轮内固定的随机整数（含两端） |
+| `oneof(e;e;…)` | 本轮随机选一个；其余候选项可被 `distractors=rest` 拿来当干扰项 |
+| `@key` · `@key(expr)` | String Table 文本；带参数时按 `{0}` 格式化 |
+| `$header` · `$candidate` · `$roster_next` | 试卷抬头当前显示的文字 / 考号 / 记名册下一个号 |
+
+**`distractors`** 四种写法：
+
+| 写法 | 例子 | 说明 |
+|---|---|---|
+| 字面量列表 | `厚德　博学\|明德　笃学\|厚德　笃行` | 固定题只能用这种；**至少 3 个互不相同且 ≠ 答案** |
+| `=expr` 项 | `=@paper.header.count_fmt(attempt+1)\|0713` | 可与字面量混写，每项单独求值 |
+| `auto:±n\|…` | `auto:-1\|+1\|+10` | 数值答案加偏移 |
+| `rest` | `rest` | 只能配 `oneof`（至少 4 个候选），取没被选中的那几个 |
+
+运行时求出的干扰项与答案相同或彼此重复时跳过，不够 3 个时用数值邻近值补齐（不出负数；答案 ≥1 时不出 0）。
 
 ### `cross_source` 的写法（约定）
 
@@ -108,6 +142,8 @@ eraser（借橡皮金属反光看被挡住的那一半）   ✅ id 在前，说�
 | 每个题干有且只有一条答案链（双向） | 参照完整性 |
 | 难度 / 答案类型 / demo 枚举合法 | 本文档 |
 | 池中源必须存在于 `sources.csv` | 参照完整性 |
+| 固定题：无 `answer_expr`，≥3 个互不相同且 ≠ 答案的字面量干扰项 | 决策 #38 |
+| 动态题：必须有 `answer_expr`；`rest` 只配 `oneof`（≥4 候选）；`auto:` 格式合法且 ≥3 项 | 决策 #38 |
 
 **另外还有一层只有原型才查的东西**（`Tools/APlusProto/APlusProto.exe data`）：
 

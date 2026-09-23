@@ -4,6 +4,10 @@ world.paper.section.reading,Reading Comprehension,教材,,n/a,,1,印刷体,
 world.paper.section.writing,Writing,教材,,n/a,,1,印刷体,
 world.listening.instruction,Listen to the recording and choose the best answer.,教材,,n/a,,1,印刷体,
 world.listening.q_fmt,Question {0}.,教材,,n/a,,1,印刷体,★A2：听力音频可被污染——「Question 9」念的是你的考号
+world.listening.q3.opt.a,In the library.,教材,,n/a,,1,印刷体,q.en.03 的每轮答案池（4 选 1 抽一个为答案，其余 3 个为干扰项）
+world.listening.q3.opt.b,At the school gate.,教材,,n/a,,1,印刷体,
+world.listening.q3.opt.c,In the classroom.,教材,,n/a,,1,印刷体,
+world.listening.q3.opt.d,On the playground.,教材,,n/a,,1,印刷体,
 world.reading.passage.01,The student looked up. The clock on the back wall had not moved.,教材,,n/a,,1,印刷体,★A1：阅读短文开始描述这个考场；短文的年代感随 2.5.3 前退
 world.reading.q.01,What is the author's attitude towards the examination?,教材,,n/a,,1,印刷体,
 world.reading.opt.01a,Indifferent.,教材,,n/a,,1,印刷体,

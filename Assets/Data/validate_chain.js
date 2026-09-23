@@ -12,6 +12,7 @@
  *   - 遮挡状态必须被该题的落位池允许
  *   - 每个题干（questions.csv / world_en.csv）都有且只有一条答案链
  *   - 每条答案链都能找到对应的题干
+ *   - 四选一（决策 #38）：固定题 3 个以上字面干扰项；动态题有 answer_expr，干扰项为 auto:/rest/列表
  */
 
 const fs = require('fs');
@@ -21,7 +22,7 @@ const DIR = __dirname;
 const LOC = path.join(DIR, '..', 'Localization');
 
 const SRC_HEAD = ['id', 'name', 'channel', 'location', 'risk', 'demo', 'occlusions', 'notes'];
-const CHAIN_HEAD = ['q_id', 'answer_type', 'answer', 'pools', 'cross_source', 'occlusions', 'difficulty', 'demo', 'notes'];
+const CHAIN_HEAD = ['q_id', 'answer_type', 'answer', 'answer_expr', 'distractors', 'pools', 'cross_source', 'occlusions', 'difficulty', 'demo', 'notes'];
 const ANSWER_TYPES = ['固定', '动态'];
 const DIFFICULTIES = ['易', '中', '难'];
 const CHANNELS = ['环境', '手机'];
@@ -30,6 +31,8 @@ const ID_RE = /^[a-z][a-z0-9_]*$/;
 const MIN_POOLS = 2;
 const MAX_POOLS = 4;
 const MIN_CROSS = 3;
+const MIN_DISTRACTORS = 3;
+const AUTO_RE = /^auto:[+-]\d+(\|[+-]\d+)*$/;
 
 function parseCsv(text) {
   if (text.charCodeAt(0) === 0xfeff) text = text.slice(1);
@@ -101,6 +104,29 @@ for (const c of chain) {
   if (!DIFFICULTIES.includes(c.difficulty)) errors.push(`${at}: difficulty 非法 → "${c.difficulty}"`);
   if (!YN.includes(c.demo)) errors.push(`${at}: demo 必须是 y/n → "${c.demo}"`);
   if (!c.answer) errors.push(`${at}: answer 为空 → ${c.q_id}`);
+
+  // ---- 四选一（决策 #38）----
+  const ds = c.distractors;
+  if (c.answer_type === '固定') {
+    if (c.answer_expr) errors.push(`${at}: 固定题不该有 answer_expr → ${c.q_id}`);
+    const items = ds ? ds.split('|') : [];
+    if (items.length < MIN_DISTRACTORS) errors.push(`${at}: 干扰项 ${items.length} 个；四选一至少要 ${MIN_DISTRACTORS} 个 → ${c.q_id}`);
+    if (items.some((d) => d.startsWith('=') || d.startsWith('auto:') || d === 'rest')) errors.push(`${at}: 固定题的干扰项只能是字面值 → ${c.q_id}`);
+    if (items.includes(c.answer)) errors.push(`${at}: 干扰项与答案相同 → ${c.q_id}`);
+    if (new Set(items).size !== items.length) errors.push(`${at}: 干扰项有重复 → ${c.q_id}`);
+  } else if (c.answer_type === '动态') {
+    if (!c.answer_expr) errors.push(`${at}: 动态题缺 answer_expr（answer 列只是给人看的说明）→ ${c.q_id}`);
+    if (ds === 'rest') {
+      if (!/^oneof\(/.test(c.answer_expr)) errors.push(`${at}: 干扰项 rest 只能配 oneof(...) → ${c.q_id}`);
+      else if (c.answer_expr.split(';').length < MIN_DISTRACTORS + 1) errors.push(`${at}: oneof 至少要 ${MIN_DISTRACTORS + 1} 个候选 → ${c.q_id}`);
+    } else if (ds && ds.startsWith('auto:')) {
+      if (!AUTO_RE.test(ds)) errors.push(`${at}: auto 干扰项格式应为 auto:-1|+1|+10 → ${c.q_id}`);
+      else if (ds.slice(5).split('|').length < MIN_DISTRACTORS) errors.push(`${at}: auto 偏移至少 ${MIN_DISTRACTORS} 个 → ${c.q_id}`);
+    } else {
+      const items = ds ? ds.split('|') : [];
+      if (items.length < MIN_DISTRACTORS) errors.push(`${at}: 干扰项 ${items.length} 个；四选一至少要 ${MIN_DISTRACTORS} 个 → ${c.q_id}`);
+    }
+  }
 
   const pools = c.pools ? c.pools.split('|').filter(Boolean) : [];
   if (pools.length < MIN_POOLS || pools.length > MAX_POOLS) {
