@@ -1,0 +1,48 @@
+html, body {
+  margin: 0;
+  height: 100%;
+  overflow: hidden;
+  background: #000;
+}
+
+#game {
+  width: 100%;
+  height: 100%;
+  display: block;
+  outline: none;
+  touch-action: none;
+}
+
+#flash {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0;
+  background: #fff;
+}
+
+#gate {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  padding: 14px 36px;
+  font: 22px "PingFang SC", "Noto Sans SC", "Microsoft YaHei", sans-serif;
+  letter-spacing: 0.3em;
+  color: #ddd;
+  background: rgba(0, 0, 0, 0.6);
+  border: 1px solid #555;
+  cursor: pointer;
+}
+
+#debug {
+  position: fixed;
+  left: 8px;
+  top: 8px;
+  margin: 0;
+  padding: 6px 8px;
+  font: 12px/1.35 ui-monospace, Menlo, monospace;
+  color: #9f9;
+  background: rgba(0, 0, 0, 0.55);
+  pointer-events: none;
+}
