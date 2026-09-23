@@ -31,6 +31,10 @@ namespace APlus
         public string QId = "";
         public string AnswerTypeLabel = "";
         public string Answer = "";
+        /// <summary>动态题的机器可读答案（AnswerExpression 语法）；固定题为空，答案就是 Answer。</summary>
+        public string AnswerExpr = "";
+        /// <summary>四选一的干扰项（决策 #38）：字面列表 / auto:偏移 / rest。</summary>
+        public string Distractors = "";
         public string CrossSource = "";
         public string DifficultyLabel = "";
         public string Demo = "";
@@ -104,7 +108,7 @@ namespace APlus
         { "id", "name", "channel", "location", "risk", "demo", "occlusions", "notes" };
 
         public static readonly string[] ChainHeader = new string[]
-        { "q_id", "answer_type", "answer", "pools", "cross_source", "occlusions", "difficulty", "demo", "notes" };
+        { "q_id", "answer_type", "answer", "answer_expr", "distractors", "pools", "cross_source", "occlusions", "difficulty", "demo", "notes" };
 
         public static readonly string[] OcclusionHeader = new string[]
         { "occlusion", "id", "kind", "extra_steps", "resolvable", "note" };
@@ -215,12 +219,14 @@ namespace APlus
                 c.QId = rows[i][0];
                 c.AnswerTypeLabel = Labels.Id("answer_type", rows[i][1]);
                 c.Answer = rows[i][2];
-                SplitPipes(rows[i][3], c.Pools);
-                c.CrossSource = rows[i][4];
-                SplitPipes(rows[i][5], c.Occlusions);
-                c.DifficultyLabel = rows[i][6];
-                c.Demo = rows[i][7];
-                c.Notes = rows[i][8];
+                c.AnswerExpr = rows[i][3];
+                c.Distractors = rows[i][4];
+                SplitPipes(rows[i][5], c.Pools);
+                c.CrossSource = rows[i][6];
+                SplitPipes(rows[i][7], c.Occlusions);
+                c.DifficultyLabel = rows[i][8];
+                c.Demo = rows[i][9];
+                c.Notes = rows[i][10];
                 c.Line = i + 1;
                 c.Difficulty = Labels.ToDifficulty(c.DifficultyLabel);
                 Chain.Add(c);
