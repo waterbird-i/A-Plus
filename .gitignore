@@ -23,8 +23,11 @@
 *.opendb
 *.VC.db
 
-# 命令行原型的编译产物与报告（随时可用 Tools/build-proto.ps1 重建）
-Tools/APlusProto/bin/
+# Tools/ 下的 dotnet 工程是手写的（Unity 生成的 *.csproj 仍然忽略）
+!Tools/**/*.csproj
+
+# 命令行原型与测试工程的编译产物与报告（dotnet build 可重建）
+Tools/**/bin/
 Tools/APlusProto/reports/
 
 # 系统垃圾
