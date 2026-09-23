@@ -1,0 +1,23 @@
+{
+  "name": "a-plus",
+  "private": true,
+  "version": "0.0.0",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview",
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit",
+    "validate": "node Assets/Localization/validate.js && node Assets/Data/validate_chain.js"
+  },
+  "dependencies": {
+    "@babylonjs/core": "^9.27.1"
+  },
+  "devDependencies": {
+    "@babylonjs/inspector": "^9.27.1",
+    "@types/node": "^26.6.2",
+    "typescript": "^7.0.2",
+    "vite": "^8.3.0",
+    "vitest": "^5.0.1"
+  }
+}

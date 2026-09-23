@@ -35,3 +35,8 @@ Tools/APlusProto/reports/
 Thumbs.db
 desktop.ini
 *~
+
+# Web (Babylon.js + Vite)
+node_modules/
+dist/
+*.tsbuildinfo
