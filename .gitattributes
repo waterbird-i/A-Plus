@@ -18,3 +18,23 @@
 *.fbx binary
 *.wav  binary
 *.ogg  binary
+# Unity YAML 资产（Force Text 序列化）
+*.unity   text eol=lf
+*.prefab  text eol=lf
+*.asset   text eol=lf
+*.meta    text eol=lf
+*.mat     text eol=lf
+*.asmdef  text eol=lf
+*.inputactions text eol=lf
+*.json    text eol=lf
+
+# Unity 自己序列化的 YAML：空字符串就写成 "m_Name: "（行尾带空格），这些文件每次保存由编辑器整体重写。
+# 对手写代码有用的空白检查在这里只会变成噪声（而且 Unity 一保存就复现），所以只对这些路径关掉。
+# *.cs / *.csproj / *.asmdef / *.md 等手写文件仍然照常检查。
+*.asset   whitespace=-trailing-space,-blank-at-eof
+*.meta    whitespace=-trailing-space,-blank-at-eof
+*.unity   whitespace=-trailing-space,-blank-at-eof
+*.prefab  whitespace=-trailing-space,-blank-at-eof
+
+# FMOD
+*.bank binary
