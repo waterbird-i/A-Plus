@@ -1,0 +1,39 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+
+      - run: npm ci
+
+      # 两个 CSV 校验器：文本表结构 + 答案链的关卡设计约束。
+      - name: CSV 校验
+        run: npm run validate
+
+      - name: 类型检查
+        run: npm run typecheck
+
+      # 106 条逻辑测试，其中一条是「源码里一个中文字面量都不留」的硬编码扫描。
+      - name: 逻辑测试
+        run: npm test
+
+      - name: 生产构建
+        run: npm run build
+
+# 注意：`npm run smoke`（无头浏览器全流程）**故意没有**放进 CI。
+# 它要一个真的 Chrome，还要起 preview 服务；本机跑通了，Linux runner 上的
+# Chrome 路径 / --no-sandbox 还没验过。把没验过的东西放进每次 push 的路径上，
+# 只会训练人忽略红灯。它现在的定位是「把构建产物交给真人之前跑一遍」：
+#   本地：npm run smoke

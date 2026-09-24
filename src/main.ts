@@ -42,6 +42,11 @@ async function boot(): Promise<void> {
   if (problems.length > 0) console.warn(problems);
 
   const engine = await EngineFactory.CreateAsync(canvas, { antialias: true, stencil: true });
+  // 「要调试」= 开发构建，或生产版带了 ?debug。
+  // 引擎必须在 controller 之前就能看到：万一 EngineFactory 静默退回 NullEngine
+  // （画面全黑却一条报错都没有），得有个地方能把「你到底给了我哪个引擎」问出来。
+  const wantsDebug = import.meta.env.DEV || location.search.includes('debug');
+  if (wantsDebug) (window as unknown as { __engine: unknown }).__engine = engine;
   const scene = new Scene(engine);
   const room = new Classroom(scene, table);
   const seed = Number(new URLSearchParams(location.search).get('seed') ?? Date.now() % 1000000) | 0;
@@ -52,8 +57,9 @@ async function boot(): Promise<void> {
   scene.activeCamera = game.view.camera;
 
   // 调试面板：默认关着，按 ` 才出来（而且只有开发构建或 ?debug 才有这个东西）。
-  const debug = import.meta.env.DEV || location.search.includes('debug') ? new DebugOverlay(document.body) : null;
-  if (import.meta.env.DEV) (window as unknown as { __aplus: unknown }).__aplus = game;
+  const debug = wantsDebug ? new DebugOverlay(document.body) : null;
+  // scripts/smoke.mjs 也读它 —— 冒烟跑的是**构建产物**（那才是要发出去的东西），所以这里不能只认 DEV。
+  if (wantsDebug) (window as unknown as { __aplus: unknown }).__aplus = game;
 
   // 「怎么玩」自己占一屏：平时不出现，只有玩家点开始按钮旁边那颗、或按 H 才弹。
   const help = new HintOverlay(document.body, table, 'ui.pause.resume', () => refreshGate());
