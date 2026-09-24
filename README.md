@@ -4,6 +4,11 @@
 
 **玩法一句话**：卷子上的题不用真答——每道题旁印着 4 位题码，掏出翻盖机**搜题**（准、贵、要一直掏着）或**问学霸**（便宜、慢、会错）拿答案；监考在过道里巡逻，被她看见作弊，她会**闪现到你身旁**记名，同场记满 3 次即死。
 
+
+## 直接玩
+
+**https://waterbird-i.github.io/A-Plus/** —— 每次 push 到 `main` 由 `.github/workflows/pages.yml` 重建。
+真人测试就用这个链接（`?seed=4242` 固定种子复现同一张卷子，`?debug` 出调试面板）。
 > [!important] 游戏逻辑在 `src/core/`，不在呈现层里
 > `src/core/` 是**不引用 Babylon、不做 IO 的纯 TypeScript**，由原 C# `APlus.Core` 逐文件移植，同种子下输出与 C# 版逐字节一致。
 > 所以**不开浏览器也能跑全部逻辑测试**（`npm test`），`src/game/` 只做表现与输入。
