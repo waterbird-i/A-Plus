@@ -41,6 +41,28 @@ export interface AnswerChainRow {
   difficulty: Difficulty;
   isDemo: boolean;
   isDynamic: boolean;
+  /** #34：该题答案在 Demo 域内的字符数范围（遮挡规格 §2.1 的可读性下限按它分档）。 */
+  answerCharsMin: number;
+  answerCharsMax: number;
+}
+
+/** 遮挡规格 §2.1 的三档（按答案字符数）。与 Assets/Data/validate_chain.js 的 answerTierOf 同一规则。 */
+export const AnswerTier = { A: 'a', B: 'b', C: 'c' } as const;
+export type AnswerTier = (typeof AnswerTier)[keyof typeof AnswerTier];
+
+export function answerTierFor(chars: number): AnswerTier {
+  if (chars <= 2) return AnswerTier.A;
+  if (chars <= 4) return AnswerTier.B;
+  return AnswerTier.C;
+}
+
+/** answer_chars 列的取值域："N" 或 "N-M"。格式非法时按 1–1 兜底（校验器会先报错）。 */
+function parseAnswerChars(spec: string): [number, number] {
+  const parts = (spec ?? '').split('-');
+  const min = tryParseInt(parts[0]);
+  const max = parts.length > 1 ? tryParseInt(parts[1]) : min;
+  if (min === null || max === null) return [1, 1];
+  return [min, max];
 }
 
 /** occlusion_ids.csv 的一行：把中文遮挡状态映射成代码可用的 ASCII 枚举名。 */
@@ -92,7 +114,7 @@ export class EnumLabels {
 }
 
 export const SOURCE_HEADER = ['id', 'name', 'channel', 'location', 'risk', 'demo', 'occlusions', 'notes'];
-export const CHAIN_HEADER = ['q_id', 'answer_type', 'answer', 'answer_expr', 'distractors', 'pools', 'cross_source', 'occlusions', 'difficulty', 'demo', 'notes'];
+export const CHAIN_HEADER = ['q_id', 'answer_type', 'answer', 'answer_expr', 'distractors', 'pools', 'cross_source', 'occlusions', 'difficulty', 'demo', 'answer_chars', 'notes'];
 export const OCCLUSION_HEADER = ['occlusion', 'id', 'kind', 'extra_steps', 'resolvable', 'note'];
 export const ENUM_LABEL_HEADER = ['domain', 'label', 'id', 'weight', 'note'];
 
@@ -186,6 +208,7 @@ export class GameData {
       const r = rows[i];
       if (r.length !== CHAIN_HEADER.length) { this.problems.push('answer_chain.csv:' + (i + 1) + ': bad column count'); continue; }
       const answerType = this.labels.id('answer_type', r[1]);
+      const chars = parseAnswerChars(r[10]);
       this.chain.push({
         qId: r[0],
         answerTypeLabel: answerType,
@@ -197,7 +220,9 @@ export class GameData {
         occlusions: splitPipes(r[7]),
         difficultyLabel: r[8],
         demo: r[9],
-        notes: r[10],
+        answerCharsMin: chars[0],
+        answerCharsMax: chars[1],
+        notes: r[11],
         line: i + 1,
         difficulty: this.labels.toDifficulty(r[8]),
         isDemo: r[9] === 'y',
