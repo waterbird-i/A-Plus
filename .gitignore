@@ -1,35 +1,3 @@
-# Unity 生成物（这些永远不进仓）
-[Ll]ibrary/
-[Tt]emp/
-[Oo]bj/
-[Bb]uild/
-[Bb]uilds/
-[Ll]ogs/
-[Uu]ser[Ss]ettings/
-[Mm]emoryCaptures/
-
-# Unity / IDE 生成的工程文件
-*.csproj
-*.unityproj
-*.sln
-*.suo
-*.user
-*.userprefs
-*.pidb
-*.booproj
-*.svd
-*.pdb
-*.mdb
-*.opendb
-*.VC.db
-
-# Tools/ 下的 dotnet 工程是手写的（Unity 生成的 *.csproj 仍然忽略）
-!Tools/**/*.csproj
-
-# 命令行原型与测试工程的编译产物与报告（dotnet build 可重建）
-Tools/**/bin/
-Tools/APlusProto/reports/
-
 # 系统垃圾
 .DS_Store
 Thumbs.db
