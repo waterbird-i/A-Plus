@@ -13,6 +13,7 @@
  * 环境变量：
  *   CHROME_BIN   指定 Chrome 可执行文件（默认 macOS 的 Google Chrome）
  *   SMOKE_HEADED=1  不带头跑（看得到画面，用来排查）
+ *   SMOKE_URL=https://…  改测一个已经发出去的地址（不构建、不起本地服务）
  */
 import { spawn } from 'node:child_process';
 import { mkdtempSync, rmSync } from 'node:fs';
@@ -24,7 +25,9 @@ const HEADED = process.env.SMOKE_HEADED === '1';
 const DEV_PORT = 5199;
 const CDP_PORT = 9333;
 // ?debug 是生产构建里打开调试钩子的开关（见 src/main.ts 的 wantsDebug）。
-const URL_ = `http://127.0.0.1:${DEV_PORT}/?seed=4242&debug=1`;
+// SMOKE_URL 给了就用它（线上地址），否则构建本地产物自己起服务。
+const REMOTE = (process.env.SMOKE_URL ?? '').replace(/\/$/, '');
+const URL_ = `${REMOTE || `http://127.0.0.1:${DEV_PORT}`}/?seed=4242&debug=1`;
 const VITE_BIN = new URL('../node_modules/vite/bin/vite.js', import.meta.url).pathname;
 
 const checks = [];
@@ -88,22 +91,28 @@ let vite, chrome, cdp, chromeProfile;
 async function main() {
   console.log('A+ headless smoke (npm run smoke)\n');
 
-  console.log('[1/5] build + preview');
-  // 冒烟跑的是**构建产物**，不是 dev server：分块路径、base、压缩，
-  // 以及「同一个 Babylon 模块被拆成两份实例」这类问题，只有产物上才看得见。
-  await new Promise((resolve, reject) => {
-    const b = spawn('npm', ['run', 'build'], { stdio: ['ignore', 'inherit', 'inherit'] });
-    b.on('exit', (code) => (code === 0 ? resolve() : reject(new Error('npm run build failed, exit ' + code))));
-  });
-  // 直接跑本地 vite 的入口，不经 npx：npx 会再套一层进程，
-  // kill 掉 npx 之后孙进程还占着端口，第二次跑就起不来了。
-  // --host 127.0.0.1 也不能省：vite 默认只绑 localhost，本机上会解析成 ::1，
-  // 脚本去连 127.0.0.1 就会直接超时（这个坑真踩过一次）。
-  vite = spawn(process.execPath, [VITE_BIN, 'preview', '--host', '127.0.0.1', '--port', String(DEV_PORT), '--strictPort'], { stdio: ['ignore', 'pipe', 'pipe'] });
-  vite.stderr.on('data', (b) => { const s = String(b); if (!/VITE_CONFIG_NATIVE/.test(s)) process.stderr.write('[vite] ' + s); });
-  await until('preview server', async () => {
-    try { return (await fetch(`http://127.0.0.1:${DEV_PORT}/`)).ok; } catch { return false; }
-  }, 60000);
+  // SMOKE_URL 指向一个已经发出去的地址（比如 GitHub Pages）时，不构建也不起本地服务，
+  // 直接把它当被测对象 —— 「上传成功」和「能玩」是两件事，这一步量的就是后者。
+  if (REMOTE) {
+    console.log(`[1/5] skipping build, testing remote ${REMOTE}`);
+  } else {
+    console.log('[1/5] build + preview');
+    // 冒烟跑的是**构建产物**，不是 dev server：分块路径、base、压缩，
+    // 以及「同一个 Babylon 模块被拆成两份实例」这类问题，只有产物上才看得见。
+    await new Promise((resolve, reject) => {
+      const b = spawn('npm', ['run', 'build'], { stdio: ['ignore', 'inherit', 'inherit'] });
+      b.on('exit', (code) => (code === 0 ? resolve() : reject(new Error('npm run build failed, exit ' + code))));
+    });
+    // 直接跑本地 vite 的入口，不经 npx：npx 会再套一层进程，
+    // kill 掉 npx 之后孙进程还占着端口，第二次跑就起不来了。
+    // --host 127.0.0.1 也不能省：vite 默认只绑 localhost，本机上会解析成 ::1，
+    // 脚本去连 127.0.0.1 就会直接超时（这个坑真踩过一次）。
+    vite = spawn(process.execPath, [VITE_BIN, 'preview', '--host', '127.0.0.1', '--port', String(DEV_PORT), '--strictPort'], { stdio: ['ignore', 'pipe', 'pipe'] });
+    vite.stderr.on('data', (b) => { const s = String(b); if (!/VITE_CONFIG_NATIVE/.test(s)) process.stderr.write('[vite] ' + s); });
+    await until('preview server', async () => {
+      try { return (await fetch(`http://127.0.0.1:${DEV_PORT}/`)).ok; } catch { return false; }
+    }, 60000);
+  }
 
   console.log('[2/5] launching Chrome');
   chromeProfile = mkdtempSync(join(tmpdir(), 'aplus-smoke-'));
