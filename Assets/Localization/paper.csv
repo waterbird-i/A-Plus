@@ -13,3 +13,4 @@ paper.answer_sheet.title,答题卡,卷面,,n/a,,1,印刷体,
 paper.signature.student,考生签名,卷面,,n/a,,1,印刷体,
 paper.signature.parent,家长签字,卷面,,n/a,,1,印刷体,★恐怖点（6.3）：你签了你爸的名字；第三轮后签名变成你爸的笔迹
 paper.mark.blank,____,卷面,,n/a,,1,印刷体,填空横线
+paper.question.code_fmt,题码 {0},卷面,,n/a,,1,印刷体,★决策 #42：印在每道题题号旁的 4 位码，在翻盖机「搜题」里输入它。印刷体小字——它是卷子的一部分，不是 HUD
