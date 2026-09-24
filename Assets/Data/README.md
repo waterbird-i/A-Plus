@@ -32,10 +32,10 @@
 
 > PowerShell 的 `Get-Content` 在**没有 BOM** 的文件上会按系统 ANSI（中文 Windows 上是 GBK）解码，
 > 而 GBK 是双字节编码，会把紧随其后的**换行也当成尾字节吃掉** —— 本目录的 `enum_labels.csv` 与
-> `Assets/Scripts/APlus/HardcodedStringScanner.cs` 都因此损坏过一次（修复记录见 `Docs/遮挡表现规格.md` §7.7）。
+> `Assets/Scripts/APlus/HardcodedStringScanner.cs`（已随 Unity / C# 骨架删除，见 tag `unity-skeleton-final`）都因此损坏过一次（修复记录见 `Docs/遮挡表现规格.md` §7.7）。
 
 **改这两张表请用编辑器或 Node，不要用 PowerShell 的 `Get-Content`/`Set-Content` 往返。**
-原型自检里有一条 `every csv carries a utf-8 BOM` 守着。
+原型自检里有一条 `every csv carries a utf-8 BOM` 守着（原 C# 原型已删，现在由 `tests/dataAndRound.test.ts` 的 `every CSV carries a UTF-8 BOM` 断言）。
 
 ## sources.csv 列
 
@@ -145,7 +145,7 @@ eraser（借橡皮金属反光看被挡住的那一半）   ✅ id 在前，说�
 | 固定题：无 `answer_expr`，≥3 个互不相同且 ≠ 答案的字面量干扰项 | 决策 #38 |
 | 动态题：必须有 `answer_expr`；`rest` 只配 `oneof`（≥4 候选）；`auto:` 格式合法且 ≥3 项 | 决策 #38 |
 
-**另外还有一层只有原型才查的东西**（`Tools/APlusProto/APlusProto.exe data`）：
+**另外还有一层跨文件的参照完整性检查**（原 C# 原型里是 `Tools/APlusProto/APlusProto.exe data`，该原型已随 Unity / C# 骨架删除；现在由 `src/core/gameData.ts` 的 `crossCheck()` 接管，`tests/dataAndRound.test.ts` 断言 `problems` 为空）：
 
 | 检查 | 为什么 JS 校验器查不了 |
 |---|---|

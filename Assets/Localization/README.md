@@ -109,4 +109,4 @@ node validate.js
 | 6.3 的「家长签字」没有 key | ⚠️ 设计文档 6.3 提到「你爸的签名」，但 String Table 里无处安放（它是**呈现文本**，笔迹资产）—— 需要在 `paper.csv` 或资产侧定 |
 | `sms.csv` 的 `lines` 列全空 | ⚠️ 导致 `第{0}题 invigilator`（16 字符 > `max_chars` 11）的**折行规则无法实现**。需要在数据侧补行数约定 |
 | 文本量与字体 | `src` 列去重字符 **434 个**（其中汉字 351）；`sms.csv` 去重汉字 **63 个** —— 这是点阵字模自建时的实际字形规模依据（Demo 只需 63–128 个汉字） |
-| C# 侧 | **已完成**：`Assets/Scripts/APlus/StringTable.cs`（含 BOM 容忍、列数校验、`en_status` 回落报警）+ `HardcodedStringScanner.cs`（中文/转义字面量扫描）。两者都由 `Tools/APlusProto` 实测（扫描 8 个文件 / 259 个字面量 / 0 错误 0 警告）。Unity Editor 菜单在 `Assets/Scripts/Editor/`，**未编译验证**（本机无 Unity） |
+| C# 侧（已删） | **已移植为 TS 后删除**（决策 #41）：原 `Assets/Scripts/APlus/StringTable.cs`（BOM 容忍、列数校验、`en_status` 回落报警）+ `HardcodedStringScanner.cs`（中文/转义字面量扫描），现在对应 `src/core/stringTable.ts` 与 `scripts/hardcodedStringScanner.ts`。原 C# 版实测过「扫描 8 个文件 / 259 个字面量 / 0 错误 0 警告」；Unity Editor 菜单随骨架一并删除（当时也未编译验证） |
