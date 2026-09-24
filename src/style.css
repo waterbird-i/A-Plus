@@ -21,11 +21,19 @@ html, body {
   background: #fff;
 }
 
-#gate {
+/* 开始 / 暂停时露出来的那一小撮按钮；锁了鼠标就整个收起来 */
+#gate-bar {
   position: fixed;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+}
+
+#gate {
   padding: 14px 36px;
   font: 22px "PingFang SC", "Noto Sans SC", "Microsoft YaHei", sans-serif;
   letter-spacing: 0.3em;
@@ -35,6 +43,23 @@ html, body {
   cursor: pointer;
 }
 
+/* 教学那一屏的入口。它只在这里、在暂停时出现，游玩过程中不会冒出来 */
+#gate-help {
+  padding: 7px 20px;
+  font: 14px "PingFang SC", "Noto Sans SC", "Microsoft YaHei", sans-serif;
+  letter-spacing: 0.2em;
+  color: #9a9a9a;
+  background: rgba(0, 0, 0, 0.45);
+  border: 1px solid #444;
+  cursor: pointer;
+}
+
+#gate-help:hover {
+  color: #eee;
+  border-color: #888;
+}
+
+/* 开发用的状态面板：默认关着，按 ` 才出来（见 debugOverlay.ts） */
 #debug {
   position: fixed;
   left: 8px;
@@ -45,4 +70,120 @@ html, body {
   color: #9f9;
   background: rgba(0, 0, 0, 0.55);
   pointer-events: none;
+}
+
+/* 「怎么玩」：单独一屏。平时不出现，只有玩家自己要的时候才弹（开始按钮旁边那颗 / H 键） */
+#hint {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: rgba(0, 0, 0, 0.72);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.25s ease, visibility 0.25s;
+  pointer-events: none;
+}
+
+#hint.open {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+#hint .hint-panel {
+  max-width: 640px;
+  max-height: 82vh;
+  overflow-y: auto;
+  padding: 22px 28px 24px;
+  font: 15px/1.7 "PingFang SC", "Noto Sans SC", "Microsoft YaHei", sans-serif;
+  color: #ddd;
+  background: rgba(12, 12, 14, 0.94);
+  border: 1px solid #3c3c3c;
+  border-left: 2px solid #666;
+}
+
+#hint .hint-title {
+  margin-bottom: 10px;
+  font-size: 17px;
+  letter-spacing: 0.2em;
+  color: #fff;
+}
+
+#hint ul {
+  margin: 0;
+  padding-left: 18px;
+}
+
+#hint li {
+  margin: 4px 0;
+}
+
+#hint-close {
+  display: block;
+  margin: 18px auto 0;
+  padding: 9px 30px;
+  font: 17px "PingFang SC", "Noto Sans SC", "Microsoft YaHei", sans-serif;
+  letter-spacing: 0.25em;
+  color: #ddd;
+  background: rgba(0, 0, 0, 0.6);
+  border: 1px solid #555;
+  cursor: pointer;
+}
+
+#hint-close:hover {
+  color: #fff;
+  border-color: #999;
+}
+
+/* 准星：只在看着卷子时露出来 */
+#reticle {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  width: 5px;
+  height: 5px;
+  margin: -2.5px 0 0 -2.5px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.5);
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.45);
+  opacity: 0;
+  transition: opacity 0.25s ease;
+  pointer-events: none;
+}
+
+/* 广播字幕：喇叭响的那几秒 */
+#caption {
+  position: fixed;
+  left: 50%;
+  bottom: 7%;
+  transform: translateX(-50%);
+  max-width: 70%;
+  padding: 6px 14px;
+  font: 18px/1.5 "PingFang SC", "Noto Sans SC", "Microsoft YaHei", sans-serif;
+  letter-spacing: 0.08em;
+  color: #f2efe6;
+  text-align: center;
+  background: rgba(0, 0, 0, 0.45);
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* 掏着手机时的光标：鼠标移它，左键按它下面的键 */
+#phone-cursor {
+  position: fixed;
+  width: 14px;
+  height: 14px;
+  margin: -7px 0 0 -7px;
+  border: 2px solid rgba(255, 236, 170, 0.95);
+  border-radius: 50%;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.6);
+  pointer-events: none;
+  display: none;
+}
+
+#phone-cursor.hot {
+  background: rgba(255, 220, 120, 0.45);
 }
