@@ -28,8 +28,22 @@ export class InvigilatorProfile {
   /** 视线落下之前，世界先给出的声音预警有多长（皮鞋声 / 日光灯变调）。 */
   cueLeadSeconds = 2.5;
 
+  /**
+   * 师视由调度器按时间表注入（podium）。巡考模式为 false：老师是在过道里走动的真人，
+   * 看没看见你由 InvigilatorPatrol 的视锥决定，调度器只管异视（决策 #43）。
+   */
+  teacherScheduled = true;
+
   static podium(): InvigilatorProfile {
     return new InvigilatorProfile();
+  }
+
+  /** 决策 #43：巡考老师（v4 默认）。她不再「定时抬头」，而是真的在过道里走、用眼睛看。 */
+  static patrol(): InvigilatorProfile {
+    const p = new InvigilatorProfile();
+    p.id = 'patrol';
+    p.teacherScheduled = false;
+    return p;
   }
 }
 
@@ -70,7 +84,7 @@ export class GazeDirector {
   }
 
   private get teacherInReal(): number {
-    return this.listening ? Infinity : this.teacherIn;
+    return this.listening || !this.profile.teacherScheduled ? Infinity : this.teacherIn;
   }
 
   private get anomalyInReal(): number {
@@ -82,7 +96,7 @@ export class GazeDirector {
     if (machine.isDead || machine.activeGaze !== GazeKind.None) return;
     if (dt < 0) dt = 0;
 
-    if (!this.listening) this.teacherIn -= dt;
+    if (!this.listening && this.profile.teacherScheduled) this.teacherIn -= dt;
     this.anomalyIn -= this.listening ? dt * this.profile.listeningAnomalyRate : dt;
 
     if (this.anomalyIn <= 0) {

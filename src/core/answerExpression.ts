@@ -29,6 +29,13 @@ export function formatTemplate(template: string, arg: string): string {
   return (template ?? '').split('{0}').join(arg ?? '');
 }
 
+/** 多参数版：{0} {1} … 依次替换（例：sms.answer.fmt「第{0}题 {1}」）。 */
+export function formatArgs(template: string, ...args: string[]): string {
+  let s = template ?? '';
+  args.forEach((a, i) => { s = s.split('{' + i + '}').join(a ?? ''); });
+  return s;
+}
+
 /**
  * 动态答案求值时能读到的世界状态。同一轮里，场景把同一份上下文画出来，
  * 卷子用它判分 —— 所以挂钟慢几分钟、红榜排第几，场景和答案永远一致。

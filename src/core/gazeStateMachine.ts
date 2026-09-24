@@ -49,6 +49,11 @@ export class GazeStateMachine {
   recordsToDeath = 3;
   /** 决策 #37：暴露到顶召来的师视持续多久。 */
   summonedGazeSeconds = 4.0;
+  /**
+   * 暴露到顶是否直接召来一道师视。巡考模式（决策 #43）下关掉：老师是走在过道里的真人，
+   * 你的呼吸声只有在她走近时才会被听见 —— 由 InvigilatorPatrol 判定。
+   */
+  summonOnExposure = true;
 
   // ---- 状态（零 HUD ⇒ 这些量不上屏，只驱动声音与画面）----
   private _state: GazeState = GazeState.Paper;
@@ -140,7 +145,7 @@ export class GazeStateMachine {
     this.updateExposure(dt);
 
     let summoned = false;
-    if (this._exposure >= 1 && this._activeGaze === GazeKind.None) {
+    if (this.summonOnExposure && this._exposure >= 1 && this._activeGaze === GazeKind.None) {
       this.injectGaze(GazeKind.Teacher, this.summonedGazeSeconds);
       this._activeGazeSummoned = true;
       summoned = true;
